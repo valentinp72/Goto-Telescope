@@ -1,4 +1,4 @@
-#include "Motor.cpp"
+/*#include "Motor.cpp"
 
 
 #define PIN_EMERGENCY 2
@@ -25,19 +25,19 @@ void startChange() {
      delay(1000);
     digitalWrite(LED_STARTED, LOW);
     delay(1000);
-  }*/
+}*//*
   if(!started) {
     started = true;
     motor1.setTarget(0);
     motor1.runToPosition();
-    motor1.setTarget(900); 
+    motor1.setTarget(900);
   }
 }
 
 void setup() {
 	pinMode(PIN_EMERGENCY, INPUT_PULLUP);
   pinMode(PIN_START,     INPUT_PULLUP);
-  
+
   pinMode(LED_STOPPED, OUTPUT);
   pinMode(LED_STARTED, OUTPUT);
 
@@ -53,4 +53,4 @@ void loop() {
   if(started) {
     motor1.run();
   }
-}
+}*/

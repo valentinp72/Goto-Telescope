@@ -21,7 +21,7 @@ private:
 
 public:
 
-	Motor::Motor(int stepPin, int dirPin, int enablePin) {
+	Motor(int stepPin, int dirPin, int enablePin) {
 		this->stepPin   = stepPin;
 		this->dirPin    = dirPin;
 		this->enablePin = enablePin;
