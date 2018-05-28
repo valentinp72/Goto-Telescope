@@ -6,7 +6,7 @@
 
 // Speeds and accelerations (RPS = Rotations Per Second)
 #define MAX_RPS 30
-#define DEFAULT_ACCELERATION 5000
+#define DEFAULT_ACCELERATION 500
 
 class Motor {
 
@@ -41,23 +41,21 @@ public:
 	}
 
 	void configurationTest() {
-		// alignement procedure
+/*
 		this->disable();
 		delay(5000);
 		this->enable();
 		this->setAlignement(0);
 
 		this->setTarget(90);
-		this->runToPosition();
 
-		this->setTarget(-135);
-		this->runToPosition();
+		this->setTarget(-135);*/
+		//if(stepper->distanceToGo() == 0) {
+		//	/* code */
+		//}
 
-		this->setTarget(900);
-		this->runToPosition();
 
-		this->setTarget(0);
-		this->runToPosition();
+		this->setTarget(9000);
 	}
 
 	void run() {
@@ -66,16 +64,19 @@ public:
 	}
 
 	void runToPosition() {
-		if(!emergencyStopped)
-		stepper.runToPosition();
+    while(stepper.isRunning() != 0) {
+        run();
+    }
 	}
 
 	void emergencyStop(bool active) {
 		if(active) {
-			stepper.setAcceleration(10000000);
-			stepper.moveTo(stepper.currentPosition());
-			stepper.runToPosition();
-			stepper.setAcceleration(DEFAULT_ACCELERATION);
+      stepper.setAcceleration(10000000);
+      while(stepper.distanceToGo() != 0) {
+        stepper.moveTo(stepper.currentPosition());
+        stepper.run();
+      }
+      stepper.setAcceleration(DEFAULT_ACCELERATION);
 		}
 		emergencyStopped = active;
 	}
