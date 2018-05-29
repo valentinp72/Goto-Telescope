@@ -18,6 +18,10 @@ Screen::Screen() {
 	fillScreen(COLOR_BLACK);
 };
 
+/**
+ * Drawing
+ */
+
 void Screen::drawPixel(int x, int y, int color) {
 	tft->drawPixel(x, y, color);
 }
@@ -34,10 +38,67 @@ void Screen::fillScreen(int color) {
 	tft->fillScreen(color);
 }
 
+
+/**
+ * Sizes
+ */
+
+void Screen::setRotation(int rotation) {
+	tft->setRotation(rotation);
+}
+
+int Screen::getRotation() {
+	return tft->getRotation();
+}
+
 int Screen::height() {
 	return tft->height();
 }
 
 int Screen::width() {
 	return tft->width();
+}
+
+int Screen::getCursorX() {
+	return tft->getCursorX();
+}
+
+int Screen::getCursorY() {
+	return tft->getCursorY();
+}
+
+
+/**
+ * Text
+ */
+void Screen::setCursor(int x, int y) {
+	tft->setCursor(x, y);
+}
+
+void Screen::setTextColor(int foregroundColor) {
+	tft->setTextColor(foregroundColor);
+}
+
+void Screen::setTextColor(int foregroundColor, int backgroundColor) {
+	tft->setTextColor(foregroundColor, backgroundColor);
+}
+
+void Screen::setTextSize(int size) {
+	tft->setTextSize(size);
+}
+
+void Screen::setTextWrap(boolean wrap) {
+	tft->setTextWrap(wrap);
+}
+
+void Screen::print(const char * str, ...) {
+	va_list list;
+	va_start(list, str);
+
+	size_t needed = vsnprintf(NULL, 0, str, list) + 1;
+	char * buffer = (char *) malloc(needed);
+	vsnprintf(buffer, needed, str, list);
+
+	tft->print(buffer);
+	free(buffer);
 }

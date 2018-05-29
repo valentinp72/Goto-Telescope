@@ -1,6 +1,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_TFTLCD.h>
 #include <TouchScreen.h>
+#include <stdarg.h>
 
 // The control pins for the LCD can be assigned to any digital or
 // analog pins...but we'll use the analog pins as this allows us to
@@ -70,14 +71,28 @@ class Screen {
 public:
 	static Screen *getInstance ();
 
+	/* Drawing */
 	void fillRect(int x, int y, int width, int height, int color);
 	void drawPixel(int x, int y, int color);
 	void drawLine(int x0, int y0, int x1, int y1, int color);
 	void fillScreen(int color);
 
+	/* Sizes */
+	void setRotation(int rotation);
+	int getRotation();
 	int height();
 	int width();
+	int getCursorX();
+	int getCursorY();
 
+	/* Text */
+	void drawChar(int x, int y, unsigned char c, int color, int backgroundColor, int size);
+	void setCursor(int x, int y);
+	void setTextColor(int foregroundColor);
+	void setTextColor(int foregroundColor, int backgroundColor);
+	void setTextSize(int size);
+	void setTextWrap(boolean wrap);
+	void print(const char * str, ...);
 
 private:
 	Screen();
