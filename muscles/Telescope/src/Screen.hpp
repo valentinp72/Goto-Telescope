@@ -1,3 +1,6 @@
+#ifndef SCREEN_H
+#define SCREEN_H
+
 #include <Adafruit_GFX.h>
 #include <Adafruit_TFTLCD.h>
 #include <TouchScreen.h>
@@ -107,3 +110,5 @@ private:
 	MCUFRIEND_kbv * tft;
 	static Screen * singleton;
 };
+
+#endif
