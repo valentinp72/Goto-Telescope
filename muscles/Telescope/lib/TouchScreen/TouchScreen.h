@@ -11,7 +11,7 @@ class TSPoint {
  public:
   TSPoint(void);
   TSPoint(int16_t x, int16_t y, int16_t z);
-  
+
   bool operator==(TSPoint);
   bool operator!=(TSPoint);
 

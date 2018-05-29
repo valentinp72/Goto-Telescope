@@ -1,12 +1,15 @@
 #include <Arduino.h>
 
 #include "Motor.cpp"
+#include "Screen.hpp"
 
+Screen * s;
 
 void setup() {
-    // put your setup code here, to run once:
+    s = Screen::getInstance();
 }
 
 void loop() {
-    // put your main code here, to run repeatedly:
+    s->fillRect(0, 0, 240, 8, COLOR_MAROON);
+	s->drawLine(0, 0, s->width(), 100, COLOR_PINK);
 }
