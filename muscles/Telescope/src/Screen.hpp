@@ -72,9 +72,16 @@ public:
 	static Screen *getInstance ();
 
 	/* Drawing */
-	void fillRect(int x, int y, int width, int height, int color);
 	void drawPixel(int x, int y, int color);
 	void drawLine(int x0, int y0, int x1, int y1, int color);
+	void drawRect(int x, int y, int w, int h, int color);
+	void fillRect(int x, int y, int width, int height, int color);
+	void drawCircle(int x0, int y0, int r, int color);
+	void fillCircle(int x0, int y0, int r, int color);
+	void drawTriangle(int x0, int y0, int x1, int y1, int x2, int y2, int color);
+	void fillTriangle(int x0, int y0, int x1, int y1, int x2, int y2, int color);
+	void drawRoundRect(int x0, int y0, int w, int h, int radius, int color);
+	void fillRoundRect(int x0, int y0, int w, int h, int radius, int color);
 	void fillScreen(int color);
 
 	/* Sizes */

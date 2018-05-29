@@ -30,6 +30,34 @@ void Screen::drawLine(int x0, int y0, int x1, int y1, int color) {
 	tft->drawLine(x0, y0, x1, y1, color);
 }
 
+void Screen::drawRect(int x, int y, int w, int h, int color) {
+	tft->drawRect(x, y, w, h, color);
+}
+
+void Screen::drawCircle(int x0, int y0, int r, int color) {
+	tft->drawCircle(x0, y0, r, color);
+}
+
+void Screen::fillCircle(int x0, int y0, int r, int color) {
+	tft->fillCircle(x0, y0, r, color);
+}
+
+void Screen::drawTriangle(int x0, int y0, int x1, int y1, int x2, int y2, int color) {
+	tft->drawTriangle(x0, y0, x1, y1, x2, y2, color);
+}
+
+void Screen::fillTriangle(int x0, int y0, int x1, int y1, int x2, int y2, int color) {
+	tft->fillTriangle(x0, y0, x1, y1, x2, y2, color);
+}
+
+void Screen::drawRoundRect(int x0, int y0, int w, int h, int radius, int color) {
+	tft->drawRoundRect(x0, y0, w, h, radius, color);
+}
+
+void Screen::fillRoundRect(int x0, int y0, int w, int h, int radius, int color) {
+	tft->fillRoundRect(x0, y0, w, h, radius, color);
+}
+
 void Screen::fillRect(int x, int y, int width, int height, int color) {
 	tft->fillRect(x, y, width, height, color);
 }
