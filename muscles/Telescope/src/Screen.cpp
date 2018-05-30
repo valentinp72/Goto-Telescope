@@ -10,12 +10,15 @@ Screen * Screen::getInstance () {
 }
 
 Screen::Screen() {
-	ts  = new TouchScreen(XP, YP, XM, YM, 300);
 	tft = new MCUFRIEND_kbv();
+	ts  = new TouchScreen(XP, YP, XM, YM, 300);
+
 
 	tft->reset();
 	tft->begin(tft->readID());
 	fillScreen(COLOR_BLACK);
+
+	nextTimeGetPoint = 0;
 };
 
 /**
@@ -66,6 +69,21 @@ void Screen::fillScreen(int color) {
 	tft->fillScreen(color);
 }
 
+
+/**
+ * Touch
+ */
+
+TSPoint Screen::getPoint() {
+	if(nextTimeGetPoint < millis()) {
+		lastTouchPoint = ts->getPoint();
+		pinMode(XM, OUTPUT);
+		pinMode(YP, OUTPUT);
+		nextTimeGetPoint = millis() + DELAY_GET_TOUCH;
+	}
+	return lastTouchPoint;
+	//return ts->getPoint();
+}
 
 /**
  * Sizes
@@ -129,4 +147,12 @@ void Screen::print(const char * str, ...) {
 
 	tft->print(buffer);
 	free(buffer);
+}
+
+/**
+ * Miscellaneous
+ */
+
+Adafruit_GFX * Screen::getAdafruitGFX() {
+	return tft;
 }

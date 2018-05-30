@@ -50,7 +50,7 @@ class Adafruit_GFX : public Print {
       int16_t w, int16_t h, uint16_t color),
     drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap,
       int16_t w, int16_t h, uint16_t color, uint16_t bg),
-    drawXBitmap(int16_t x, int16_t y, const uint8_t *bitmap, 
+    drawXBitmap(int16_t x, int16_t y, const uint8_t *bitmap,
       int16_t w, int16_t h, uint16_t color),
     drawChar(int16_t x, int16_t y, unsigned char c, uint16_t color,
       uint16_t bg, uint8_t size),
@@ -97,10 +97,10 @@ class Adafruit_GFX_Button {
 
  public:
   Adafruit_GFX_Button(void);
-  void initButton(Adafruit_GFX *gfx, int16_t x, int16_t y, 
-		      uint8_t w, uint8_t h, 
+  void initButton(Adafruit_GFX *gfx, int16_t x, int16_t y,
+		      uint8_t w, uint8_t h,
 		      uint16_t outline, uint16_t fill, uint16_t textcolor,
-		      char *label, uint8_t textsize);
+		      const char *label, uint8_t textsize);
   void drawButton(boolean inverted = false);
   boolean contains(int16_t x, int16_t y);
 

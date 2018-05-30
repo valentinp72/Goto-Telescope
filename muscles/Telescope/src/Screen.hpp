@@ -65,6 +65,7 @@
 #define COLOR_GREENYELLOW 0xAFE5      /* 173, 255,  47 */
 #define COLOR_PINK        0xF81F
 
+#define DELAY_GET_TOUCH 100 // The delay between each time the screen will ask for the touched point
 
 #include <MCUFRIEND_kbv.h>
 
@@ -87,6 +88,11 @@ public:
 	void fillRoundRect(int x0, int y0, int w, int h, int radius, int color);
 	void fillScreen(int color);
 
+	/* Touch */
+	int getLastTouchX();
+	int getLastTouchY();
+	TSPoint getPoint();
+
 	/* Sizes */
 	void setRotation(int rotation);
 	int getRotation();
@@ -104,11 +110,16 @@ public:
 	void setTextWrap(boolean wrap);
 	void print(const char * str, ...);
 
+	/* Miscellaneous */
+	Adafruit_GFX * getAdafruitGFX();
+
 private:
 	Screen();
 	TouchScreen   * ts;
 	MCUFRIEND_kbv * tft;
 	static Screen * singleton;
+	TSPoint lastTouchPoint;
+	unsigned long nextTimeGetPoint;
 };
 
 #endif
