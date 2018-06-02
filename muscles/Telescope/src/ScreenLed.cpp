@@ -8,13 +8,14 @@ ScreenLed::ScreenLed(
 	int color,
 	bool state
 ) : ScreenComponent(screen, x, y, radius, radius) {
-	this->radius     = radius;
-	this->color      = color;
-	this->state      = state;
-	this->lastState  = state;
-	this->blinking   = false;
-	this->delayBlink = 0;
-	this->nextBlink  = millis();
+	this->radius      = radius;
+	this->color       = color;
+	this->state       = state;
+	this->lastState   = state;
+	this->blinking    = false;
+	this->delayBlink  = 0;
+	this->nextBlink   = millis();
+	this->attachedPin = -1;
 
 	this->show();
 }
@@ -50,7 +51,8 @@ void ScreenLed::show() {
 	this->getScreen()->fillCircle(this->getX(), this->getY(), radius, currentColor);
 	this->getScreen()->drawCircle(this->getX(), this->getY(), radius, COLOR_DARKGREY);
 
-
+	if(attachedPin != -1)
+		digitalWrite(attachedPin, state);
 }
 
 void ScreenLed::refresh() {
@@ -68,4 +70,11 @@ void ScreenLed::updateBlinkingState() {
 			this->nextBlink = millis() + this->delayBlink;
 		}
 	}
+}
+
+
+void ScreenLed::attachDigitalPin(int pin) {
+	pinMode(pin, OUTPUT);
+	attachedPin = pin;
+	show();
 }

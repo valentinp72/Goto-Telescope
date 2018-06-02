@@ -15,6 +15,7 @@ public:
 	void setBlinking(int delay);
 	void setState(bool state);
 	bool getState();
+	void attachDigitalPin(int pin);
 
 private:
 	bool state;
@@ -23,6 +24,7 @@ private:
 	int delayBlink;
 	int radius;
 	int color;
+	int attachedPin;
 	unsigned long nextBlink;
 
 	void updateBlinkingState();
