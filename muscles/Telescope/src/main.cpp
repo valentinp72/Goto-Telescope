@@ -61,15 +61,18 @@ void setup() {
 	btnStop     = new ScreenButton(s, 150, 300, COLOR_RED, "STOP");
 	btnStop->setActions(stopOn, stopOff);
 
+	s->addComponent(ledEmergency);
+	s->addComponent(ledRunning);
+	s->addComponent(ledArmed);
+	s->addComponent(btnStart);
+	s->addComponent(btnStop);
+
+
 	begin = millis();
 }
 
 void loop() {
-	ledEmergency->refresh();
-	ledRunning->refresh();
-	ledArmed->refresh();
-	btnStart->refresh();
-	btnStop->refresh();
+	s->refresh();
 
 	s->setTextColor(COLOR_BLACK, COLOR_LIGHTGREY);
 	s->setTextSize(2);

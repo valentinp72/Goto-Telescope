@@ -12,6 +12,7 @@ Screen * Screen::getInstance () {
 Screen::Screen() {
 	tft = new MCUFRIEND_kbv();
 	ts  = new TouchScreen(XP, YP, XM, YM, 300);
+	components = new LinkedList<ScreenComponent *>();
 
 
 	tft->reset();
@@ -20,6 +21,33 @@ Screen::Screen() {
 
 	nextTimeGetPoint = 0;
 };
+
+/**
+ * Components
+ */
+void Screen::addComponent(ScreenComponent * component) {
+	components->add(component);
+}
+
+void Screen::removeComponent(ScreenComponent * component) {
+
+}
+
+void Screen::replaceComponent(ScreenComponent * before, ScreenComponent * after) {
+
+}
+
+void Screen::clearComponents() {
+	components->clear();
+}
+
+void Screen::refresh() {
+	int size = components->size();
+	for(int i = 0 ; i < size ; i++) {
+		components->get(i)->refresh();
+	}
+}
+
 
 /**
  * Drawing

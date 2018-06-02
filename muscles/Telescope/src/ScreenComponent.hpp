@@ -1,6 +1,7 @@
 #ifndef SCREEN_COMPONENT_H
 #define SCREEN_COMPONENT_H
 
+class ScreenComponent;
 #include "Screen.hpp"
 
 class ScreenComponent {

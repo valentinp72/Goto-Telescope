@@ -4,7 +4,12 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_TFTLCD.h>
 #include <TouchScreen.h>
+#include <LinkedList.h>
 #include <stdarg.h>
+
+class Screen;
+
+#include "ScreenComponent.hpp"
 
 // The control pins for the LCD can be assigned to any digital or
 // analog pins...but we'll use the analog pins as this allows us to
@@ -75,6 +80,13 @@ class Screen {
 public:
 	static Screen *getInstance ();
 
+	/* Components */
+	void addComponent(ScreenComponent * component);
+	void removeComponent(ScreenComponent * component);
+	void replaceComponent(ScreenComponent * before, ScreenComponent * after);
+	void clearComponents();
+	void refresh();
+
 	/* Drawing */
 	void drawPixel(int x, int y, int color);
 	void drawLine(int x0, int y0, int x1, int y1, int color);
@@ -120,6 +132,7 @@ private:
 	static Screen * singleton;
 	TSPoint lastTouchPoint;
 	unsigned long nextTimeGetPoint;
+	LinkedList<ScreenComponent *> * components;
 };
 
 #endif
