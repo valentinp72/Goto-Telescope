@@ -16,6 +16,8 @@ ScreenButton::ScreenButton(
 		CHAR_SIZE * CHAR_HEIGHT * (MARGIN_HEIGHT + 1),
 		COLOR_LIGHTGREY, COLOR_WHITE, color,
 		text, CHAR_SIZE);
+	on = NULL;
+	off = NULL;
 	this->setState(state);
 	this->show();
 }
@@ -23,6 +25,14 @@ ScreenButton::ScreenButton(
 
 void ScreenButton::setState(bool state) {
 	realButton->press(state);
+	if(state) {
+		if(on != NULL)
+			on();
+	}
+	else {
+		if(off != NULL)
+			off();
+	}
 }
 
 bool ScreenButton::getState() {
@@ -31,6 +41,11 @@ bool ScreenButton::getState() {
 
 void ScreenButton::show() {
 	this->realButton->drawButton(getState());
+}
+
+void ScreenButton::setActions(action_t on, action_t off) {
+	this->on  = on;
+	this->off = off;
 }
 
 void ScreenButton::refresh() {

@@ -16,9 +16,26 @@ ScreenLed * ledArmed;
 #define LED_RED   22
 
 ScreenButton * btnStart;
+ScreenButton * btnStop;
 
 unsigned long begin;
 int i = 0;
+
+void startOn() {
+	ledRunning->setActive();
+}
+void startOff() {
+	//ledRunning->setUnactive();
+}
+
+void stopOn() {
+	ledRunning->setUnactive();
+	ledEmergency->setActive();
+}
+
+void stopOff() {
+	ledEmergency->setUnactive();
+}
 
 void setup() {
     s = Screen::getInstance();
@@ -36,15 +53,15 @@ void setup() {
 	ledArmed     = new ScreenLed(s, 200, 50, 10, COLOR_BLUE);
 	ledArmed->attachDigitalPin(LED_BLUE);
 	ledArmed->setBlinking(500);
-	ledArmed->setUnactive();
+	//ledArmed->setUnactive();
 
 	btnStart     = new ScreenButton(s, 150, 150, COLOR_GREEN, "Start");
+	btnStart->setActions(startOn, NULL);
+
+	btnStop     = new ScreenButton(s, 150, 300, COLOR_RED, "STOP");
+	btnStop->setActions(stopOn, stopOff);
+
 	begin = millis();
-
-	pinMode(LED_BLUE,  OUTPUT);
-	pinMode(LED_GREEN, OUTPUT);
-	pinMode(LED_RED,   OUTPUT);
-
 }
 
 void loop() {
@@ -52,6 +69,7 @@ void loop() {
 	ledRunning->refresh();
 	ledArmed->refresh();
 	btnStart->refresh();
+	btnStop->refresh();
 
 	s->setTextColor(COLOR_BLACK, COLOR_LIGHTGREY);
 	s->setTextSize(2);

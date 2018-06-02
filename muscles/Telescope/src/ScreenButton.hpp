@@ -12,13 +12,15 @@
 #define TS_MINY 75
 #define TS_MAXY 930
 
-#define CHAR_SIZE    2
+#define CHAR_SIZE    3
 
 #define CHAR_WIDTH    6
 #define MARGIN_WIDTH  1
 
 #define CHAR_HEIGHT   8
 #define MARGIN_HEIGHT 1
+
+typedef void (*action_t)();
 
 class ScreenButton : public ScreenComponent {
 
@@ -29,9 +31,12 @@ public:
 
 	void setState(bool state);
 	bool getState();
+	void setActions(action_t on, action_t off);
 
 private:
 	Adafruit_GFX_Button * realButton;
+	action_t on;
+	action_t off;
 };
 
 #endif
