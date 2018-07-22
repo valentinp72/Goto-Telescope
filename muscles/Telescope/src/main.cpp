@@ -11,9 +11,9 @@ ScreenLed * ledEmergency;
 ScreenLed * ledRunning;
 ScreenLed * ledArmed;
 
-#define LED_BLUE  26
-#define LED_GREEN 24
-#define LED_RED   22
+#define LED_BLUE  47
+#define LED_GREEN 46
+#define LED_RED   45
 
 ScreenButton * btnStart;
 ScreenButton * btnStop;
@@ -31,16 +31,17 @@ void startOff() {
 void stopOn() {
 	ledRunning->setUnactive();
 	ledEmergency->setActive();
+	ledArmed->setUnactive();
 }
 
 void stopOff() {
 	ledEmergency->setUnactive();
+	ledArmed->setActive();
+	ledArmed->setBlinking(500);
 }
 
 void setup() {
     s = Screen::getInstance();
-	//s->setRotation(3);
-	s->fillRoundRect(0, 0, s->width(), s->height(), 20, COLOR_WHITE);
 
 	ledEmergency = new ScreenLed(s, 100, 50, 10, COLOR_RED);
 	ledEmergency->attachDigitalPin(LED_RED);
